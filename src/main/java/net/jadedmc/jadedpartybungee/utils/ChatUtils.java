@@ -5,6 +5,9 @@ import net.kyori.adventure.text.serializer.bungeecord.BungeeComponentSerializer;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.BaseComponent;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class ChatUtils {
     private final static int CENTER_PX = 154;
 
@@ -73,22 +76,35 @@ public class ChatUtils {
      * @return Message with the color codes replaced.
      */
     public static String replaceLegacy(String message) {
-        return message.replace("&0", "<black>")
-                .replace("&1", "<dark_blue>")
-                .replace("&2", "<dark_green>")
-                .replace("&3", "<dark_aqua>")
-                .replace("&4", "<dark_red>")
-                .replace("&5", "<dark_purple>")
-                .replace("&6", "<gold>")
-                .replace("&7", "<gray>")
-                .replace("&8", "<dark_gray>")
-                .replace("&9", "<blue>")
-                .replace("&a", "<green>")
-                .replace("&b", "<aqua>")
-                .replace("&c", "<red>")
-                .replace("&d", "<light_purple>")
-                .replace("&e", "<yellow>")
-                .replace("&f", "<white>")
+        // Create pattern to find hex color codes.
+        Pattern pattern = Pattern.compile("&#[a-fA-F0-9]{6}");
+        Matcher matcher = pattern.matcher(message);
+
+        // Find and translate legacy hex color codes.
+        while (matcher.find()) {
+            String color = message.substring(matcher.start() + 1, matcher.end());
+            message = message.replace("&" + color, "<reset><color:" + color + ">");
+            matcher = pattern.matcher(message);
+        }
+
+        // Then replace legacy color codes.
+        return message.replace("§", "&")
+                .replace("&0", "<reset><black>")
+                .replace("&1", "<reset><dark_blue>")
+                .replace("&2", "<reset><dark_green>")
+                .replace("&3", "<reset><dark_aqua>")
+                .replace("&4", "<reset><dark_red>")
+                .replace("&5", "<reset><dark_purple>")
+                .replace("&6", "<reset><gold>")
+                .replace("&7", "<reset><gray>")
+                .replace("&8", "<reset><dark_gray>")
+                .replace("&9", "<reset><blue>")
+                .replace("&a", "<reset><green>")
+                .replace("&b", "<reset><aqua>")
+                .replace("&c", "<reset><red>")
+                .replace("&d", "<reset><light_purple>")
+                .replace("&e", "<reset><yellow>")
+                .replace("&f", "<reset><white>")
                 .replace("&k", "<obfuscated>")
                 .replace("&l", "<bold>")
                 .replace("&m", "<strikethrough>")
