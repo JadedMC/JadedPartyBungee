@@ -65,49 +65,19 @@ public class PartyCMD extends Command implements TabExecutor {
             return;
         }
 
-        switch(args[0].toLowerCase()) {
-            case "create":
-                createCMD(player);
-                break;
-            case "disband":
-                disbandCMD(player);
-                break;
-            case "invite":
-            case "i":
-                inviteCMD(player, args);
-                break;
-            case "leave":
-                leaveCMD(player);
-                break;
-            case "list":
-            case "l":
-                listCMD(player);
-                break;
-            case "promote":
-            case "p":
-                promoteCMD(player, args);
-                break;
-            case "accept":
-            case "a":
-                acceptCMD(player, args);
-                break;
-            case "decline":
-            case "d":
-                declineCMD(player, args);
-                break;
-            case "kick":
-                kickCMD(player, args);
-                break;
-            case "summon":
-                summonCMD(player);
-                break;
-            case "help":
-            case "?":
-                helpCMD(player);
-                break;
-            default:
-                inviteCMD(player, new String[]{"invite", args[0]});
-                break;
+        switch (args[0].toLowerCase()) {
+            case "create" -> createCMD(player);
+            case "disband" -> disbandCMD(player);
+            case "invite", "i" -> inviteCMD(player, args);
+            case "leave" -> leaveCMD(player);
+            case "list", "l" -> listCMD(player);
+            case "promote", "p" -> promoteCMD(player, args);
+            case "accept", "a" -> acceptCMD(player, args);
+            case "decline", "d" -> declineCMD(player, args);
+            case "kick" -> kickCMD(player, args);
+            case "summon" -> summonCMD(player);
+            case "help", "?" -> helpCMD(player);
+            default -> inviteCMD(player, new String[]{"invite", args[0]});
         }
     }
 
@@ -400,15 +370,9 @@ public class PartyCMD extends Command implements TabExecutor {
         List<String> members = new ArrayList<>();
         for(ProxiedPlayer member : party.getMembers()) {
             switch (party.getRank(member)) {
-                case LEADER:
-                    leader = member.getName();
-                    break;
-                case MODERATOR:
-                    moderators.add(member.getName());
-                    break;
-                case MEMBER:
-                    members.add(member.getName());
-                    break;
+                case LEADER -> leader = member.getName();
+                case MODERATOR -> moderators.add(member.getName());
+                case MEMBER -> members.add(member.getName());
             }
         }
 
@@ -514,11 +478,9 @@ public class PartyCMD extends Command implements TabExecutor {
     @Override
     public Iterable<String> onTabComplete(CommandSender sender, String[] args) {
 
-        if(!(sender instanceof ProxiedPlayer)) {
+        if(!(sender instanceof ProxiedPlayer player)) {
           return null;
         }
-
-        ProxiedPlayer player = (ProxiedPlayer) sender;
 
         if(args.length == 1) {
             List<String> suggestions = new ArrayList<>();
