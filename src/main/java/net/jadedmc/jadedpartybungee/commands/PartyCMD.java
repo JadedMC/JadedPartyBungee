@@ -39,7 +39,7 @@ public class PartyCMD extends Command {
             return;
         }
 
-        switch(args[0]) {
+        switch(args[0].toLowerCase()) {
             case "create":
                 createCMD(player);
                 break;
