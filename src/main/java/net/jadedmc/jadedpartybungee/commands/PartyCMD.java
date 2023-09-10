@@ -8,14 +8,17 @@ import net.jadedmc.jadedpartybungee.utils.StringUtils;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
+import net.md_5.bungee.api.plugin.TabExecutor;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /**
  * This class runs the /party command, which controls everything about parties.
  */
-public class PartyCMD extends Command {
+public class PartyCMD extends Command implements TabExecutor {
     private final JadedPartyBungee plugin;
 
     /**
@@ -483,5 +486,30 @@ public class PartyCMD extends Command {
 
             member.connect(player.getServer().getInfo());
         }
+    }
+
+    @Override
+    public Iterable<String> onTabComplete(CommandSender sender, String[] args) {
+
+        if(!(sender instanceof ProxiedPlayer)) {
+          return null;
+        }
+
+        ProxiedPlayer player = (ProxiedPlayer) sender;
+
+        if(args.length == 1) {
+            List<String> suggestions = new ArrayList<>();
+
+            for(ProxiedPlayer serverPlayer : player.getServer().getInfo().getPlayers()) {
+                if(serverPlayer.getName().startsWith(args[0])) {
+                    suggestions.add(serverPlayer.getName());
+                }
+            }
+
+            return suggestions;
+        }
+
+
+        return Collections.emptyList();
     }
 }
