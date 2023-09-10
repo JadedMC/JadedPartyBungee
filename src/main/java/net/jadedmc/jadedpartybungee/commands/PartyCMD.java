@@ -276,11 +276,16 @@ public class PartyCMD extends Command {
 
         party.invitePlayer(target);
 
-        ChatUtils.chat(target, "&8&m+-----------------------***-----------------------+");
-        ChatUtils.chat(target, "&aYou have been invited to join &f" + player.getName() + "&a's party!");
-        ChatUtils.chat(target, "&a/party accept " + player.getName());
-        ChatUtils.chat(target, "&c/party deny " + player.getName());
-        ChatUtils.chat(target, "&8&m+-----------------------***-----------------------+");
+        ChatUtils.chat(target, "&a▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+        ChatUtils.centeredChat(target, "&a&lParty Invite");
+        ChatUtils.chat(target, "");
+        ChatUtils.centeredChat(target, "&f" + player.getName() + " &7has invited you to join their party!");
+        ChatUtils.chat(target, "");
+        ChatUtils.chat(target, "  <dark_gray>» <click:suggest_command:'/party accept " + player.getName() + "'><hover:show_text:'<green>Click to accept'><green>/party accept " + player.getName() + "</hover></click>");
+        ChatUtils.chat(target, "  <dark_gray>» <click:suggest_command:'/party deny " + player.getName() + "'><hover:show_text:'<red>Click to deny'><red>/party deny " + player.getName() + "</hover></click>");
+        ChatUtils.chat(target, "");
+        ChatUtils.chat(target, "&a▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+
         party.sendMessage("<green><bold>Party</bold> <dark_gray>» <white>" + target.getName() + " &ahas been invited to the party.");
     }
 
