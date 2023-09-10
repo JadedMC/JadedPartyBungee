@@ -1,7 +1,31 @@
-package net.jadedmc.jadedpartybungee.party;
+/*
+ * This file is part of JadedParty, licensed under the MIT License.
+ *
+ *  Copyright (c) JadedMC
+ *  Copyright (c) contributors
+ *
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy
+ *  of this software and associated documentation files (the "Software"), to deal
+ *  in the Software without restriction, including without limitation the rights
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *  copies of the Software, and to permit persons to whom the Software is
+ *  furnished to do so, subject to the following conditions:
+ *
+ *  The above copyright notice and this permission notice shall be included in all
+ *  copies or substantial portions of the Software.
+ *
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *  SOFTWARE.
+ */
+package net.jadedmc.jadedparty.party;
 
-import net.jadedmc.jadedpartybungee.JadedPartyBungee;
-import net.jadedmc.jadedpartybungee.utils.ChatUtils;
+import net.jadedmc.jadedparty.JadedPartyPlugin;
+import net.jadedmc.jadedparty.utils.ChatUtils;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 
 import java.util.*;
@@ -11,7 +35,7 @@ import java.util.concurrent.TimeUnit;
  * Represents a group of players playing together.
  */
 public class Party {
-    private final JadedPartyBungee plugin;
+    private final JadedPartyPlugin plugin;
     private final Map<UUID, PartyRank> members = new HashMap<>();
     private final UUID uuid = UUID.randomUUID();
     private final Map<UUID, String> invites = new HashMap<>();
@@ -19,7 +43,7 @@ public class Party {
     // Party Settings
     private boolean publicParty;
 
-    public Party(JadedPartyBungee plugin, ProxiedPlayer leader) {
+    public Party(JadedPartyPlugin plugin, ProxiedPlayer leader) {
         this.plugin = plugin;
         members.put(leader.getUniqueId(), PartyRank.LEADER);
 
