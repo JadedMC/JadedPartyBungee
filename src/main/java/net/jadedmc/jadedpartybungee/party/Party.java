@@ -18,7 +18,6 @@ public class Party {
 
     // Party Settings
     private boolean publicParty;
-    private PartyColor partyColor;
 
     public Party(JadedPartyBungee plugin, ProxiedPlayer leader) {
         this.plugin = plugin;
@@ -26,7 +25,6 @@ public class Party {
 
         // Sets the default settings of the party.
         publicParty = false;
-        partyColor = PartyColor.GREEN;
     }
 
     /**
