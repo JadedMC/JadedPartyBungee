@@ -75,6 +75,10 @@ public class PartyCMD extends Command {
             case "summon":
                 summonCMD(player);
                 break;
+            case "help":
+            case "?":
+                helpCMD(player);
+                break;
             default:
                 inviteCMD(player, new String[]{"invite", args[0]});
                 break;
