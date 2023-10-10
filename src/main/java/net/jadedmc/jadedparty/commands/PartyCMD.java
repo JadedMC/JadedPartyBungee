@@ -134,7 +134,7 @@ public class PartyCMD extends Command implements TabExecutor {
 
         // Creates the party.
         plugin.partyManager().createParty(player);
-        ChatUtils.chat(player, "<green><bold>Party</bold> <dark_gray>» <green>Party as been created.");
+        ChatUtils.chat(player, "<green><bold>Party</bold> <dark_gray>» <green>Party has been created.");
     }
 
     /**
