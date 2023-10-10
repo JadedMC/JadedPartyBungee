@@ -289,6 +289,44 @@ public class PartyCMD extends Command implements TabExecutor {
         party.sendMessage("<green><bold>Party</bold> <dark_gray>» <white>" + target.getName() + " &ahas been invited to the party.");
     }
 
+    public void joinCMD(ProxiedPlayer player, String[] args) {
+        // Makes sure the player has entered a username to invite.
+        if(args.length != 2) {
+            ChatUtils.chat(player, "<red><bold>Usage</bold> <dark_gray>» <red>/party join [player]");
+            return;
+        }
+
+        // Makes sure the target is online.
+        ProxiedPlayer target = plugin.getProxy().getPlayer(args[1]);
+        if(target == null) {
+            ChatUtils.chat(player, "<red><bold>Error</bold> <dark_gray>» <red>That person is not online.");
+            return;
+        }
+
+        // Makes sure the target is in a party.
+        if(plugin.partyManager().getParty(target) == null) {
+            ChatUtils.chat(player, "<red><bold>Error</bold> <dark_gray>» <red>They are not in a party.");
+            return;
+        }
+
+        // Make sure the sender isn't in a party.
+        if(plugin.partyManager().getParty(player) != null) {
+            ChatUtils.chat(player, "<red><bold>Error</bold> <dark_gray>» <red>You are already in a party.");
+            return;
+        }
+
+        Party party = plugin.partyManager().getParty(target);
+
+        // Make sure the party is public.
+        if(!party.isPublic()) {
+            ChatUtils.chat(player, "<red><bold>Error</bold> <dark_gray>» <red>That party is not public.");
+            return;
+        }
+
+        party.addPlayer(player);
+        party.sendMessage("<green><bold>Party</bold> <dark_gray>» <white>" + player.getName() + " &ahas joined the party.");
+    }
+
     public void kickCMD(ProxiedPlayer player, String[] args) {
         // Makes sure the player is in a party.
         if(plugin.partyManager().getParty(player) == null) {

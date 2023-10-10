@@ -152,6 +152,14 @@ public class Party {
     }
 
     /**
+     * Get if the party is public.
+     * @return Whether the party is public.
+     */
+    public boolean isPublic() {
+        return publicParty;
+    }
+
+    /**
      * Removes the invite to a player.
      * @param player Player to remove invite to.
      */
@@ -181,6 +189,14 @@ public class Party {
         for(ProxiedPlayer player : getMembers()) {
             ChatUtils.chat(player, message);
         }
+    }
+
+    /**
+     * If the party should be public.
+     * @param publicParty Whether the party is public or not.
+     */
+    public void setPublic(boolean publicParty) {
+        this.publicParty = publicParty;
     }
 
     /**
